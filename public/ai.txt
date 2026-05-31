@@ -1,0 +1,17 @@
+# AI Crawler Permissions for TradeFlow
+# https://www.tradeflow.io
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /

@@ -1,0 +1,44 @@
+# TradeFlow
+
+> TradeFlow is the all-in-one platform that lets solo tradespeople and small crews build a website, book jobs, dispatch teams, and get paid — without paying enterprise prices for tools they don't need.
+
+## What TradeFlow Does
+TradeFlow combines a lead-generating website builder optimized for trades with job management, crew dispatch, digital quoting, invoicing, and integrated payments. It is built exclusively for solo operators and small crews (1–5 people) who currently duct-tape together Wix, QuickBooks, Google Calendar, and text messages. Setup takes 20 minutes.
+
+## Core Features
+- Built-in website builder with trade-specific templates and SEO
+- Drag-and-drop job scheduling and crew dispatch calendar
+- Line-item quoting with e-signature approval
+- GPS-enabled field worker mobile PWA
+- Automatic invoice generation from completed jobs
+- Stripe-integrated payment links and on-site card capture
+- Customer SMS automation ("on my way," "job complete")
+- Expense and receipt capture tied to jobs
+- Automated Google review requests
+- QuickBooks export
+
+## Who Uses TradeFlow
+- Solo owner-operators (electricians, plumbers, HVAC techs, handymen) who do the work and run the business
+- Office managers and dispatchers handling scheduling and invoicing for 2–5 person crews
+- Growing crew chiefs scaling from one truck to multiple crews who need profit tracking and professional systems
+- Seasoned tradespeople transitioning to independent work who need simple technology and real human support
+
+## Pricing
+- TradeFlow Solo: $39/month — 1 user, website, quotes, scheduling, invoicing, basic CRM
+- TradeFlow Crew: $79/month — up to 5 users, field PWA, photo capture, route optimization, automated reviews, QuickBooks export
+- TradeFlow Pro: $149/month — up to 10 users, AI receptionist, automation sequences, reputation dashboard, multi-location, advanced reporting
+
+## Key Differentiators
+- Only platform combining website builder + job management + payments for under $50/month
+- Built for 1–5 person crews, not 10+ truck enterprises
+- 14-day free trial, no credit card, month-to-month
+- Setup in 20 minutes by non-technical users
+
+## Important URLs
+- https://www.tradeflow.io
+- https://www.tradeflow.io/pricing
+- https://www.tradeflow.io/contact
+
+## Company
+TradeFlow is a product of Verado Ventures (Blue Tree Group)
+Full documentation: https://www.tradeflow.io/llms-full.txt
