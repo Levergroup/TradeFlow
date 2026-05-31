@@ -8,6 +8,7 @@
 
 export const primaryNav = [
   { label: 'Pricing', href: '/pricing' },
+  { label: 'Compare', href: '/vs/jobber' },
   { label: 'Contact', href: '/contact' },
 ] as const;
 
@@ -19,12 +20,21 @@ export const footerNav = {
       { label: 'Contact', href: '/contact' },
     ],
   },
-  company: {
-    title: 'Legal',
+  forWho: {
+    title: 'For Tradespeople',
     links: [
-      { label: 'Privacy Policy', href: '/privacy-policy' },
-      { label: 'Terms of Service', href: '/terms-of-service' },
-      { label: 'Refund Policy', href: '/refund-policy' },
+      { label: 'Solo Operators', href: '/for/solo-operator' },
+      { label: 'Office Managers', href: '/for/office-manager' },
+      { label: 'Crew Chiefs', href: '/for/crew-chief' },
+      { label: 'Going Independent', href: '/for/seasoned-tradesperson' },
+    ],
+  },
+  compare: {
+    title: 'Compare',
+    links: [
+      { label: 'TradeFlow vs Jobber', href: '/vs/jobber' },
+      { label: 'TradeFlow vs ServiceTitan', href: '/vs/servicetitan' },
+      { label: 'TradeFlow vs Housecall Pro', href: '/vs/housecall-pro' },
     ],
   },
 } as const;

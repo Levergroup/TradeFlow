@@ -33,6 +33,10 @@ src/
     pricing/                Pricing page (Product + AggregateOffer schema)
     contact/                Contact page + form
     thank-you/              Post-form confirmation (noindex, social sharing)
+    for/[avatar]/           Avatar landing pages (SSG): solo-operator,
+                            office-manager, crew-chief, seasoned-tradesperson
+    vs/[competitor]/        Comparison pages (SSG): jobber, servicetitan,
+                            housecall-pro
     privacy-policy/ terms-of-service/ cookie-policy/ refund-policy/
     disclaimer/ gdpr/ acceptable-use/   7 compliance pages (required for ads)
     sitemap.ts              Dynamic sitemap (canonical www URLs only)
@@ -80,7 +84,10 @@ the GTM dataLayer; **Decline** fires no tracking. Choice persists 365 days.
 
 ## Next phase (per SOP, not yet built)
 
-`/features` + `/features/[slug]`, `/for/[avatar]`, `/vs/[competitor]`, `/blog`
-(MDX), `/free-tools/[slug]`, `/about`, `/roi-calculator`, `/developers`,
-`/affiliate`, `/changelog`. Add each to `src/lib/nav.ts` and `src/app/sitemap.ts`
-as it ships.
+`/features` + `/features/[slug]`, `/blog` (MDX), `/free-tools/[slug]`, `/about`,
+`/roi-calculator`, `/developers`, `/affiliate`, `/changelog`. Add each to
+`src/lib/nav.ts` and `src/app/sitemap.ts` as it ships.
+
+Data for content-driven pages lives in `src/lib/` (`avatars.ts`,
+`competitors.ts`) — add new avatars or competitors there and the SSG routes pick
+them up automatically.

@@ -1,6 +1,8 @@
 import type { MetadataRoute } from 'next';
 import { site } from '@/lib/site';
 import { legalNav } from '@/lib/nav';
+import { avatars } from '@/lib/avatars';
+import { competitors } from '@/lib/competitors';
 
 /**
  * Sitemap. All URLs use the canonical www `site.url`. Only pages that actually
@@ -17,6 +19,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: url('/contact'), lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
   ];
 
+  // Avatar landing pages and comparison pages — high-intent SEO routes.
+  const avatarPages: MetadataRoute.Sitemap = avatars.map((a) => ({
+    url: url(`/for/${a.slug}`),
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.9,
+  }));
+
+  const vsPages: MetadataRoute.Sitemap = competitors.map((c) => ({
+    url: url(`/vs/${c.slug}`),
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.9,
+  }));
+
   const legal: MetadataRoute.Sitemap = legalNav.map((item) => ({
     url: url(item.href),
     lastModified: now,
@@ -29,5 +46,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: url('/llms-full.txt'), lastModified: now, changeFrequency: 'daily', priority: 0.5 },
   ];
 
-  return [...core, ...legal, ...llm];
+  return [...core, ...avatarPages, ...vsPages, ...legal, ...llm];
 }
