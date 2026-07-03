@@ -1,198 +1,72 @@
 import type { Metadata } from 'next';
+import { Fragment } from 'react';
 import Link from 'next/link';
 import { pageMetadata } from '@/lib/seo';
 import { webApplicationSchema, breadcrumbSchema } from '@/lib/schema';
 import { JsonLd } from '@/components/JsonLd';
-import { site } from '@/lib/site';
-import {
-  BrowserMockup,
-  CalendarMockup,
-  QuoteMockup,
-  PhoneSmsMockup,
-  CrewMockup,
-  ReviewMockup,
-} from '@/components/mockups';
+import { FeatureAccordion } from '@/components/FeatureAccordion';
+import { site, pricingTiers } from '@/lib/site';
+import { featureMatrix, featureFaqs, type Cell } from '@/lib/featureMatrix';
 
 export const metadata: Metadata = pageMetadata({
   title:
     'TradeFlow Features — Website, Scheduling, Quoting & Payments for Tradespeople',
   description:
-    'Every tool a solo tradesperson or small crew needs in one platform. Website builder, job scheduling, digital quoting, crew dispatch, invoicing, and Stripe payments. From $39/month.',
+    'See every feature included in TradeFlow Solo, Crew, and Pro. Free trade website, job scheduling, digital quoting, crew dispatch, invoicing, and Stripe payments. From $39/month.',
   path: '/features',
 });
 
-type Feature = {
-  key: string;
-  headline: string;
-  body: string;
-  benefits: string[];
-  callout: string;
-  ctaLabel: string;
-  ctaHref: string;
-  Visual: () => JSX.Element;
-};
-
-const features: Feature[] = [
-  {
-    key: 'website',
-    headline: 'Get Found on Google Before Your Competitor Finishes Their Coffee',
-    body:
-      'Your TradeFlow website is built specifically for trades — not a blank template you have to figure out. It ranks locally, loads fast, and turns visitors into booked jobs automatically. Most tradespeople are live in 20 minutes.',
-    benefits: [
-      'Trade-specific templates (electrical, plumbing, HVAC, landscaping, handyman)',
-      'Built-in local SEO — your suburb, your trade, page one',
-      'Online booking form connected to your calendar',
-      'Mobile-first (60% of your customers search on their phone)',
-      'SSL, hosting, and domain included',
-    ],
-    callout:
-      'Mike booked 3 new jobs in his first week from Google searches he never would have shown up in before.',
-    ctaLabel: 'See Your Website Live in 20 Minutes',
-    ctaHref: '/free-tools/free-trade-website',
-    Visual: BrowserMockup,
-  },
-  {
-    key: 'scheduling',
-    headline: 'Your Whole Week, Every Tech, Every Job — One Screen',
-    body:
-      "Stop running your schedule from a whiteboard, group text, or your memory. TradeFlow's drag-and-drop calendar shows every job, every tech, and every gap in your week. Change something — your crew gets notified automatically.",
-    benefits: [
-      'Drag-and-drop calendar (desktop and mobile)',
-      'Assign jobs to crew members with one tap',
-      'Automatic SMS to crew when a job is added or changed',
-      'Customer gets "on my way" text automatically',
-      'Color-coded by status: scheduled, in progress, complete',
-    ],
-    callout:
-      'Sarah stopped playing phone tag with her techs the first day. Every change goes out automatically.',
-    ctaLabel: 'Try the Scheduler Free',
-    ctaHref: `${site.appUrl}/signup`,
-    Visual: CalendarMockup,
-  },
-  {
-    key: 'quoting',
-    headline: 'Send a Professional Quote Before You Leave the Driveway',
-    body:
-      "Build a line-item quote on your phone in 90 seconds. The customer gets a link, reviews it, and approves it with an e-signature. No printing. No chasing. No losing the job because you forgot to follow up.",
-    benefits: [
-      'Line-item quotes built on your phone',
-      'Customer e-signature approval (legally binding)',
-      "Auto-follow-up if quote isn't opened in 24 hours",
-      'Convert approved quote to invoice in one tap',
-      'Quote templates for your most common jobs',
-    ],
-    callout:
-      'Devin stopped losing jobs to slow follow-up. His close rate went up 40% in the first month.',
-    ctaLabel: 'Send Your First Quote Free',
-    ctaHref: `${site.appUrl}/signup`,
-    Visual: QuoteMockup,
-  },
-  {
-    key: 'payments',
-    headline: 'Get Paid Before You Drive Away. Every Time.',
-    body:
-      'Job complete — tap invoice — customer pays by text or card on the spot. No more chasing checks. No more 30-day payment cycles. Money in your account the same day.',
-    benefits: [
-      'Auto-generate invoice when job is marked complete',
-      'Customer pays via text-to-pay link or card on site',
-      'Stripe-powered — funds deposited next business day',
-      'Automated payment reminders for overdue invoices',
-      'QuickBooks export for your accountant',
-    ],
-    callout:
-      "Linda gets paid on the spot now. She hasn't chased a check in three months.",
-    ctaLabel: 'Get Paid Faster — Try Free',
-    ctaHref: `${site.appUrl}/signup`,
-    Visual: PhoneSmsMockup,
-  },
-  {
-    key: 'dispatch',
-    headline: 'Your Crew Shows Up Knowing Exactly What to Do',
-    body:
-      'Your field workers open the app and see their jobs for the day — address, job details, client notes, gate codes, scope of work. They tap start, do the job, tap complete, take photos. You see everything in real time.',
-    benefits: [
-      'Simple PWA — works on any phone, no app store required',
-      'Job details, client notes, and photos in the field',
-      'GPS check-in when job starts',
-      'Photo capture tied to job record',
-      'Works offline — syncs when signal returns',
-    ],
-    callout:
-      "Devin's crew stopped calling him for job details. He gets back 2 hours every day.",
-    ctaLabel: 'Equip Your Crew — Try Free',
-    ctaHref: `${site.appUrl}/signup`,
-    Visual: CrewMockup,
-  },
-  {
-    key: 'reviews',
-    headline: 'More 5-Star Reviews While You Sleep. No Awkward Asking.',
-    body:
-      '24 hours after every completed job, your customer gets a personal SMS asking them to leave a Google review. No copying links. No remembering to ask. Your Google profile builds itself.',
-    benefits: [
-      'Automatic review request 24hrs after job completion',
-      'Direct link to your Google Business Profile',
-      'Customizable message in your voice',
-      'Reputation dashboard — track reviews across platforms',
-      'More reviews = higher Google ranking = more inbound leads',
-    ],
-    callout:
-      'Mike went from 12 reviews to 47 in 60 days without asking a single customer.',
-    ctaLabel: 'Start Building Reviews — Free',
-    ctaHref: `${site.appUrl}/signup`,
-    Visual: ReviewMockup,
-  },
-];
-
-function FeatureModule({ feature, index }: { feature: Feature; index: number }) {
-  const reversed = index % 2 === 1;
-  const { Visual } = feature;
+/* ── Cell renderer ──────────────────────────────────────────────────────── */
+function CellValue({ cell }: { cell: Cell }) {
+  if (cell.kind === 'no') {
+    return (
+      <span className="inline-flex items-center gap-1.5 text-muted">
+        <span aria-hidden="true" className="text-lg leading-none">
+          ✕
+        </span>
+        <span className="sr-only">Not included</span>
+      </span>
+    );
+  }
+  if (cell.kind === 'text') {
+    return <span className="text-sm font-medium text-text">{cell.value}</span>;
+  }
   return (
-    <section className="section">
-      <div className="container-tf">
-        <div className="grid items-center gap-10 lg:grid-cols-2">
-          {/* Visual */}
-          <div className={`fade-up ${reversed ? 'lg:order-2' : ''}`}>
-            <div className="card !p-5">
-              <Visual />
-            </div>
-          </div>
-
-          {/* Copy */}
-          <div className={`fade-up ${reversed ? 'lg:order-1' : ''}`}>
-            <h2 className="text-3xl sm:text-4xl">{feature.headline}</h2>
-            <p className="mt-4 text-muted">{feature.body}</p>
-
-            <ul className="mt-6 space-y-3">
-              {feature.benefits.map((b) => (
-                <li key={b} className="flex items-start gap-3 text-sm text-text">
-                  <span className="mt-0.5 text-accent">✓</span>
-                  {b}
-                </li>
-              ))}
-            </ul>
-
-            <figure className="mt-6 border-l-2 border-accent pl-4">
-              <blockquote className="text-sm italic text-text">
-                &ldquo;{feature.callout}&rdquo;
-              </blockquote>
-              <figcaption className="mt-1 text-xs text-muted">
-                [Placeholder — replace with real testimonial]
-              </figcaption>
-            </figure>
-
-            <div className="mt-6">
-              <a href={feature.ctaHref} className="btn-primary">
-                {feature.ctaLabel}
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <span className="inline-flex flex-col items-center gap-0.5">
+      <span aria-hidden="true" className="text-lg leading-none text-accent">
+        ✓
+      </span>
+      <span className="sr-only">Included</span>
+      {cell.note && <span className="text-xs text-muted">{cell.note}</span>}
+    </span>
   );
 }
 
+/* Left-aligned variant for the stacked mobile card layout. */
+function CellValueInline({ cell }: { cell: Cell }) {
+  if (cell.kind === 'no') {
+    return <span className="text-muted">✕ Not included</span>;
+  }
+  if (cell.kind === 'text') {
+    return <span className="font-medium text-text">{cell.value}</span>;
+  }
+  return (
+    <span className="text-text">
+      <span className="text-accent">✓</span> {cell.note ?? 'Included'}
+    </span>
+  );
+}
+
+const tiers = [
+  { key: 'solo', label: 'Solo', price: '$39/mo' },
+  { key: 'crew', label: 'Crew', price: '$79/mo' },
+  { key: 'pro', label: 'Pro', price: '$149/mo' },
+] as const;
+
 export default function FeaturesPage() {
+  // Running counter for zebra striping across all body rows (skips category rows).
+  let rowIndex = 0;
+
   return (
     <>
       <JsonLd
@@ -205,18 +79,18 @@ export default function FeaturesPage() {
         ]}
       />
 
-      {/* Hero */}
+      {/* ── Hero ──────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden">
         <div className="hero-mesh" aria-hidden="true" />
-        <div className="container-tf relative pt-20 pb-16 sm:pt-24 text-center">
+        <div className="container-tf relative pt-20 pb-16 text-center sm:pt-24">
           <div className="mx-auto max-w-3xl">
-            <span className="eyebrow fade-up">Features</span>
+            <span className="eyebrow fade-up">Built exclusively for tradespeople</span>
             <h1 className="fade-up mt-6 text-4xl sm:text-5xl lg:text-6xl">
               Everything You Need to Run Your Trade Business. Nothing You Don&apos;t.
             </h1>
             <p className="fade-up mx-auto mt-6 max-w-2xl text-lg text-muted">
-              One login. One price. Website, jobs, quotes, payments, and crew — all
-              connected.
+              One login. One price. Your free website, jobs, quotes, payments, and
+              crew — all connected from day one.
             </p>
             <div className="fade-up mt-8">
               <a href={`${site.appUrl}/signup`} className="btn-primary">
@@ -227,61 +101,235 @@ export default function FeaturesPage() {
         </div>
       </section>
 
-      {/* Feature modules (alternating) */}
-      {features.map((feature, i) => (
-        <div key={feature.key}>
-          <div className="container-tf">
-            <hr className="section-divider" />
-          </div>
-          <FeatureModule feature={feature} index={i} />
-        </div>
-      ))}
+      <div className="container-tf">
+        <hr className="section-divider" />
+      </div>
 
-      {/* Free website hook band — amber gradient */}
-      <section className="relative overflow-hidden">
-        <div
-          className="absolute inset-0"
-          aria-hidden="true"
-          style={{
-            background:
-              'linear-gradient(120deg, rgba(245,158,11,0.18), rgba(30,58,95,0.25))',
-          }}
-        />
-        <div className="container-tf relative py-16 text-center">
-          <h2 className="fade-up text-3xl sm:text-4xl">Start With Your Free Trade Website</h2>
-          <p className="fade-up mx-auto mt-4 max-w-2xl text-muted">
-            Not ready to commit? Start with your free professional trade website — no
-            credit card, live in 20 minutes. Add scheduling, quoting, and payments when
-            you&apos;re ready.
-          </p>
-          <div className="fade-up mt-8">
-            <Link href="/free-tools/free-trade-website" className="btn-primary">
-              Get My Free Website
-            </Link>
+      {/* ── Section 1 — comparison table ──────────────────────────────── */}
+      <section className="section">
+        <div className="container-tf">
+          <h2 className="text-center text-3xl sm:text-4xl">What&apos;s Included in Every Plan</h2>
+
+          <div className="card mx-auto mt-10 max-w-5xl overflow-hidden !p-0">
+            {/* Desktop table */}
+            <div className="hidden overflow-x-auto md:block">
+              <table className="w-full border-collapse text-left">
+                <thead>
+                  <tr className="bg-bg-alt">
+                    <th className="sticky top-0 z-10 bg-bg-alt px-5 py-4 text-sm font-semibold uppercase tracking-wider text-muted">
+                      Feature
+                    </th>
+                    <th className="sticky top-0 z-10 bg-bg-alt px-4 py-4 text-center text-sm font-semibold text-text">
+                      <span className="block">Solo</span>
+                      <span className="block text-xs font-normal text-muted">$39/mo</span>
+                    </th>
+                    <th className="sticky top-0 z-10 border-l border-accent/40 bg-bg-alt px-4 py-4 text-center text-sm font-semibold text-text">
+                      <span className="mb-1 inline-flex rounded-full bg-accent px-2.5 py-0.5 text-[10px] font-semibold uppercase text-bg">
+                        Most Popular
+                      </span>
+                      <span className="block">Crew</span>
+                      <span className="block text-xs font-normal text-muted">$79/mo</span>
+                    </th>
+                    <th className="sticky top-0 z-10 bg-bg-alt px-4 py-4 text-center text-sm font-semibold text-text">
+                      <span className="block">Pro</span>
+                      <span className="block text-xs font-normal text-muted">$149/mo</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {featureMatrix.map((cat) => (
+                    <Fragment key={cat.name}>
+                      <tr>
+                        <td
+                          colSpan={4}
+                          className="bg-primary px-5 py-2.5 text-xs font-semibold uppercase tracking-widest text-accent"
+                        >
+                          {cat.name}
+                        </td>
+                      </tr>
+                      {cat.rows.map((row) => {
+                        const striped = rowIndex++ % 2 === 1;
+                        return (
+                          <tr
+                            key={row.feature}
+                            className={striped ? 'bg-[rgba(30,58,95,0.15)]' : ''}
+                          >
+                            <td className="px-5 py-4 align-top">
+                              <p className="text-sm font-semibold text-text">{row.feature}</p>
+                              {row.description && (
+                                <p className="mt-1 max-w-md text-xs leading-relaxed text-muted">
+                                  {row.description}
+                                </p>
+                              )}
+                            </td>
+                            <td className="px-4 py-4 text-center align-middle">
+                              <CellValue cell={row.solo} />
+                            </td>
+                            <td className="border-l border-accent/40 px-4 py-4 text-center align-middle">
+                              <CellValue cell={row.crew} />
+                            </td>
+                            <td className="px-4 py-4 text-center align-middle">
+                              <CellValue cell={row.pro} />
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </Fragment>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Mobile card view */}
+            <div className="divide-y divide-border md:hidden">
+              {featureMatrix.map((cat) => (
+                <div key={cat.name}>
+                  <div className="bg-primary px-4 py-2.5 text-xs font-semibold uppercase tracking-widest text-accent">
+                    {cat.name}
+                  </div>
+                  {cat.rows.map((row) => (
+                    <div key={row.feature} className="px-4 py-4">
+                      <p className="text-sm font-semibold text-text">{row.feature}</p>
+                      {row.description && (
+                        <p className="mt-1 text-xs leading-relaxed text-muted">
+                          {row.description}
+                        </p>
+                      )}
+                      <dl className="mt-3 space-y-1.5 text-sm">
+                        {(['solo', 'crew', 'pro'] as const).map((key) => (
+                          <div
+                            key={key}
+                            className={`flex items-center justify-between gap-4 rounded-lg px-3 py-1.5 ${
+                              key === 'crew' ? 'border-l-2 border-accent bg-[rgba(245,158,11,0.06)]' : ''
+                            }`}
+                          >
+                            <dt className="text-muted">
+                              {tiers.find((t) => t.key === key)!.label}
+                            </dt>
+                            <dd className="text-right">
+                              <CellValueInline cell={row[key]} />
+                            </dd>
+                          </div>
+                        ))}
+                      </dl>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Final CTA */}
+      {/* ── Section 2 — free website callout ──────────────────────────── */}
       <section className="section">
         <div className="container-tf">
-          <div className="hero-glow relative overflow-hidden rounded-3xl border border-border bg-bg-alt p-10 text-center sm:p-16">
-            <h2 className="mx-auto max-w-2xl text-3xl sm:text-4xl">
-              All of This. One Login. From $39/Month.
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-muted">
-              No contracts. Cancel anytime. 14-day free trial. Setup in 20 minutes even
-              if you&apos;ve never used business software.
-            </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <a href={`${site.appUrl}/signup`} className="btn-primary">
-                Start Free Trial
-              </a>
-              <Link href="/pricing" className="btn-secondary">
-                See Pricing
-              </Link>
+          <div
+            className="mx-auto grid max-w-5xl items-center gap-8 rounded-2xl p-8 sm:p-10 lg:grid-cols-5"
+            style={{
+              background: 'linear-gradient(135deg, #1E3A5F, #0F172A)',
+              border: '1px solid rgba(245,158,11,0.3)',
+            }}
+          >
+            <div className="lg:col-span-3">
+              <h3 className="text-2xl sm:text-3xl">
+                Every Plan Includes a Free Professional Trade Website
+              </h3>
+              <p className="mt-4 text-sm leading-relaxed text-muted">
+                Not a template you have to figure out. A real, SEO-optimized,
+                mobile-first website built for your trade — plumbing, electrical, HVAC,
+                landscaping, handyman, and more. It ranks on Google, captures leads
+                24/7, and connects directly to your quotes, calendar, and payments.
+                Worth $2,000+ if you hired an agency. Included free in every TradeFlow
+                plan.
+              </p>
+              <ul className="mt-6 grid gap-2.5 sm:grid-cols-2">
+                {[
+                  'Ranks locally for your trade and suburb',
+                  'Online booking connects to your calendar',
+                  'Mobile-first — looks perfect on any device',
+                  'SSL, hosting, and domain connection included',
+                  'Live in 20 minutes',
+                ].map((b) => (
+                  <li key={b} className="flex items-start gap-2 text-sm text-text">
+                    <span className="mt-0.5 text-accent">✓</span>
+                    {b}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="lg:col-span-2">
+              <div className="card text-center">
+                <p className="font-display text-lg text-text">Start with your free website</p>
+                <Link
+                  href="/free-tools/free-trade-website"
+                  className="btn-primary mt-4 w-full"
+                >
+                  Get My Free Trade Website
+                </Link>
+                <p className="mt-4 text-xs text-muted">
+                  Or start the full 14-day free trial and get everything
+                </p>
+                <a href={`${site.appUrl}/signup`} className="btn-secondary mt-3 w-full">
+                  Start Full Free Trial
+                </a>
+              </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ── Section 3 — pricing CTA strip ─────────────────────────────── */}
+      <section className="section">
+        <div className="container-tf">
+          <h2 className="text-center text-3xl sm:text-4xl">
+            All of This. One Login. From $39/Month.
+          </h2>
+
+          <div className="mx-auto mt-10 grid max-w-4xl gap-6 lg:grid-cols-3">
+            {pricingTiers.map((tier) => (
+              <div
+                key={tier.name}
+                className={`card flex flex-col text-center ${
+                  tier.featured ? 'pricing-featured' : ''
+                }`}
+              >
+                {tier.badge && (
+                  <span className="mx-auto mb-3 inline-flex rounded-full bg-accent px-3 py-1 text-xs font-semibold text-bg">
+                    {tier.badge}
+                  </span>
+                )}
+                <h3 className="font-display text-lg text-text">{tier.name}</h3>
+                <div className="mt-2 flex items-baseline justify-center gap-1">
+                  <span className="font-display text-3xl font-bold text-text">{tier.price}</span>
+                  <span className="text-muted">{tier.period}</span>
+                </div>
+                <p className="mt-3 text-sm text-muted">{tier.tagline}</p>
+                <a
+                  href={tier.href}
+                  className={`mt-5 w-full ${tier.featured ? 'btn-primary' : 'btn-secondary'}`}
+                >
+                  {tier.cta}
+                </a>
+                <p className="mt-3 text-xs text-muted">14-day free trial</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-8 text-center text-sm">
+            <Link href="/pricing" className="text-accent underline underline-offset-2">
+              See full pricing details →
+            </Link>
+          </p>
+        </div>
+      </section>
+
+      {/* ── Section 4 — FAQ ───────────────────────────────────────────── */}
+      <section className="section">
+        <div className="container-tf">
+          <h2 className="text-center text-3xl sm:text-4xl">Questions About Features</h2>
+          <FeatureAccordion items={featureFaqs} />
         </div>
       </section>
     </>
