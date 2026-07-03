@@ -16,6 +16,7 @@ import { PricingSection } from '@/components/home/PricingSection';
 import { LeadMagnet } from '@/components/home/LeadMagnet';
 import { FAQ } from '@/components/FAQ';
 import { FinalCTA } from '@/components/home/FinalCTA';
+import { Divider } from '@/components/Divider';
 
 export const metadata: Metadata = pageMetadata({
   title: 'TradeFlow — Field Service Management Software for Small Business',
@@ -29,17 +30,26 @@ export default function HomePage() {
     <>
       <JsonLd data={[softwareApplicationSchema(), faqSchema(homeFaqs)]} />
       <Hero />
+      <Divider />
       <PainChain />
+      <Divider />
       <BeforeAfter />
+      <Divider />
       <HowItWorks />
+      <Divider />
       <Features />
+      <Divider />
       <SocialProof />
+      <Divider />
       <PricingSection />
+      <Divider />
       <LeadMagnet />
+      <Divider />
       <FAQ
         items={homeFaqs}
         subtitle="Everything you need to know before you start your free trial."
       />
+      <Divider />
       <FinalCTA />
     </>
   );

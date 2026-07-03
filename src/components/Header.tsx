@@ -1,15 +1,28 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { site } from '@/lib/site';
 import { primaryNav } from '@/lib/nav';
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const isActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname.startsWith(href);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-bg/80 backdrop-blur">
+    <header className={`nav-root sticky top-0 z-40 ${scrolled ? 'scrolled' : ''}`}>
       <nav
         className="container-tf flex h-16 items-center justify-between"
         aria-label="Primary"
@@ -23,7 +36,9 @@ export function Header() {
             <li key={item.href}>
               <Link
                 href={item.href}
-                className="text-sm font-medium text-muted transition hover:text-text"
+                className={`nav-link text-sm font-medium text-muted transition hover:text-text ${
+                  isActive(item.href) ? 'active' : ''
+                }`}
               >
                 {item.label}
               </Link>
@@ -38,7 +53,10 @@ export function Header() {
           >
             Log in
           </a>
-          <a href={`${site.appUrl}/signup`} className="btn-primary !px-5 !py-2">
+          <a
+            href={`${site.appUrl}/signup`}
+            className="btn-primary rounded-full !px-5 !py-2"
+          >
             Start Free
           </a>
         </div>
@@ -75,7 +93,7 @@ export function Header() {
               </li>
             ))}
             <li className="mt-2">
-              <a href={`${site.appUrl}/signup`} className="btn-primary w-full">
+              <a href={`${site.appUrl}/signup`} className="btn-primary w-full rounded-full">
                 Start Free
               </a>
             </li>

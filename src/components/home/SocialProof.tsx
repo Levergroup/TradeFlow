@@ -34,9 +34,9 @@ export function SocialProof() {
           ))}
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="stagger mt-12 grid gap-6 md:grid-cols-3">
           {testimonials.map((t) => (
-            <figure key={t.role} className="card">
+            <figure key={t.role} className="card fade-up">
               <div className="text-accent" aria-hidden="true">
                 ★★★★★
               </div>

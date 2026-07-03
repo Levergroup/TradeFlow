@@ -19,11 +19,11 @@ export function FAQ({
     <section className="section">
       <div className="container-tf">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl sm:text-4xl">{title}</h2>
-          {subtitle && <p className="mt-4 text-muted">{subtitle}</p>}
+          <h2 className="fade-up text-3xl sm:text-4xl">{title}</h2>
+          {subtitle && <p className="fade-up mt-4 text-muted">{subtitle}</p>}
         </div>
 
-        <div className="mx-auto mt-10 max-w-3xl divide-y divide-border overflow-hidden rounded-2xl border border-border">
+        <div className="fade-up mx-auto mt-10 max-w-3xl divide-y divide-border overflow-hidden rounded-2xl border border-border">
           {items.map((item, i) => {
             const isOpen = open === i;
             return (

@@ -80,6 +80,26 @@ export function productOfferSchema() {
   };
 }
 
+export function webApplicationSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: site.name,
+    url: `${site.url}/features`,
+    applicationCategory: 'BusinessApplication',
+    applicationSubCategory: 'Field Service Management',
+    operatingSystem: 'Web, iOS, Android',
+    description: site.description,
+    offers: {
+      '@type': 'AggregateOffer',
+      priceCurrency: 'USD',
+      lowPrice: '39',
+      highPrice: '149',
+      offerCount: pricingTiers.length,
+    },
+  };
+}
+
 export function faqSchema(faqs: { question: string; answer: string }[]) {
   return {
     '@context': 'https://schema.org',

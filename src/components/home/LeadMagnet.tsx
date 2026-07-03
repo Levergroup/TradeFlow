@@ -11,7 +11,7 @@ export function LeadMagnet() {
   return (
     <section className="section bg-bg-alt/30">
       <div className="container-tf">
-        <div className="mx-auto grid max-w-4xl items-center gap-10 rounded-2xl border border-border bg-bg-alt p-8 md:grid-cols-2 md:p-10">
+        <div className="card fade-up mx-auto grid max-w-4xl items-center gap-10 !p-8 md:grid-cols-2 md:!p-10">
           <div>
             <span className="eyebrow">Free Download</span>
             <h2 className="mt-4 text-2xl sm:text-3xl">{site.leadMagnet.name}</h2>

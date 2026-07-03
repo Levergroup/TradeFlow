@@ -23,16 +23,16 @@ export function HowItWorks() {
     <section id="how-it-works" className="section bg-bg-alt/30">
       <div className="container-tf">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl sm:text-4xl">From Lead to Paid in 3 Steps</h2>
-          <p className="mt-4 text-muted">
+          <h2 className="fade-up text-3xl sm:text-4xl">From Lead to Paid in 3 Steps</h2>
+          <p className="fade-up mt-4 text-muted">
             No new habits to learn. TradeFlow follows the way you already work — it
             just stops the leaks.
           </p>
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="stagger mt-12 grid gap-6 md:grid-cols-3">
           {steps.map((step) => (
-            <div key={step.n} className="card relative">
+            <div key={step.n} className="card fade-up relative">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent font-display text-xl font-bold text-bg">
                 {step.n}
               </div>

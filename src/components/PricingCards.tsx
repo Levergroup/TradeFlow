@@ -2,12 +2,12 @@ import { pricingTiers } from '@/lib/site';
 
 export function PricingCards() {
   return (
-    <div className="grid gap-6 lg:grid-cols-3">
+    <div className="stagger grid gap-6 lg:grid-cols-3">
       {pricingTiers.map((tier) => (
         <div
           key={tier.name}
-          className={`card flex flex-col ${
-            tier.featured ? 'border-accent ring-1 ring-accent' : ''
+          className={`card fade-scale flex flex-col ${
+            tier.featured ? 'pricing-featured' : ''
           }`}
         >
           {tier.badge && (

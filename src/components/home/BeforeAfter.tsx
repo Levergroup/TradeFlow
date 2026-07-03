@@ -12,7 +12,7 @@ export function BeforeAfter() {
     <section className="section">
       <div className="container-tf">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl sm:text-4xl">
+          <h2 className="fade-up text-3xl sm:text-4xl">
             Same trade. <span className="text-accent">A business that runs itself.</span>
           </h2>
           <p className="mt-4 text-muted">
@@ -21,7 +21,7 @@ export function BeforeAfter() {
           </p>
         </div>
 
-        <div className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-2xl border border-border">
+        <div className="fade-up mx-auto mt-12 max-w-4xl overflow-hidden rounded-2xl border border-border">
           <div className="grid grid-cols-2 bg-bg-alt text-sm font-semibold uppercase tracking-wider">
             <div className="px-5 py-4 text-muted">Without TradeFlow</div>
             <div className="px-5 py-4 text-accent">With TradeFlow</div>

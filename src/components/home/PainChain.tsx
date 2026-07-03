@@ -21,16 +21,16 @@ export function PainChain() {
     <section className="section bg-bg-alt/30">
       <div className="container-tf">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl sm:text-4xl">If you run a trade, you know this…</h2>
-          <p className="mt-4 text-muted">
+          <h2 className="fade-up text-3xl sm:text-4xl">If you run a trade, you know this…</h2>
+          <p className="fade-up mt-4 text-muted">
             You did not get into this business to push paper. But here is where the
             week really goes.
           </p>
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="stagger mt-12 grid gap-6 md:grid-cols-3">
           {pains.map((pain) => (
-            <div key={pain.title} className="card">
+            <div key={pain.title} className="card fade-up">
               <div className="text-3xl" aria-hidden="true">
                 {pain.icon}
               </div>

@@ -8,6 +8,8 @@ import { JsonLd } from '@/components/JsonLd';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { CookieConsent } from '@/components/CookieConsent';
+import { ScrollReveal } from '@/components/ScrollReveal';
+import { ChromeGate } from '@/components/ChromeGate';
 
 const fontDisplay = Bricolage_Grotesque({
   subsets: ['latin'],
@@ -74,10 +76,11 @@ export default function RootLayout({
 
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
 
-        <Header />
-        <main id="main">{children}</main>
-        <Footer />
+        <ChromeGate header={<Header />} footer={<Footer />}>
+          {children}
+        </ChromeGate>
         <CookieConsent />
+        <ScrollReveal />
 
         {/* GTM — afterInteractive ONLY. Never also load a raw GA4 script
             (double-firing). GA4 is configured inside GTM as a Google Tag. */}
