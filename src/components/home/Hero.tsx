@@ -12,15 +12,14 @@ export function Hero() {
           </span>
 
           <h1 className="fade-up mt-6 text-4xl sm:text-5xl lg:text-6xl">
-            Drowning in admin chaos?{' '}
-            <span className="text-accent">TradeFlow</span> organizes your quotes,
-            schedule, and payments in one platform.
+            Get Found. Get Booked. <span className="text-accent">Get Paid.</span>{' '}
+            One Platform, Built for Your Trade.
           </h1>
 
           <p className="fade-up mx-auto mt-6 max-w-2xl text-lg text-muted">
-            {site.promise} TradeFlow is field service management software for
-            small business that gets you found, booked, and paid — without the
-            enterprise price tag.
+            Everything solo tradespeople and small crews need — website, jobs,
+            quotes, and payments — in one platform built for your trade. No
+            enterprise price tag. No learning curve. Set up in 20 minutes.
           </p>
 
           <div className="fade-up mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
