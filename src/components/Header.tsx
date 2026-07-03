@@ -92,6 +92,15 @@ export function Header() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link
+                href="/free-tools/free-trade-website"
+                className="block rounded-lg px-2 py-2 text-sm font-semibold text-accent hover:bg-bg-alt"
+                onClick={() => setOpen(false)}
+              >
+                Free Trade Website
+              </Link>
+            </li>
             <li className="mt-2">
               <a href={`${site.appUrl}/signup`} className="btn-primary w-full rounded-full">
                 Start Free
