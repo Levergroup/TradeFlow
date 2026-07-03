@@ -8,6 +8,10 @@ type Props = {
   source: string; // identifies which page/magnet captured the lead
   /** Optional: collect name. Per 8-point framework, keep fields minimal. */
   collectName?: boolean;
+  namePlaceholder?: string;
+  emailPlaceholder?: string;
+  /** Optional override for the fine-print line under the button. */
+  footnote?: string;
 };
 
 /**
@@ -16,7 +20,14 @@ type Props = {
  * redirects to /thank-you. Keeping the webhook server-side avoids exposing
  * it and lets us add validation/spam controls later.
  */
-export function LeadForm({ ctaLabel, source, collectName = true }: Props) {
+export function LeadForm({
+  ctaLabel,
+  source,
+  collectName = true,
+  namePlaceholder = 'First name',
+  emailPlaceholder = 'you@yourbusiness.com',
+  footnote = 'No spam. Unsubscribe anytime.',
+}: Props) {
   const router = useRouter();
   const [status, setStatus] = useState<'idle' | 'loading' | 'error'>('idle');
 
@@ -69,7 +80,7 @@ export function LeadForm({ ctaLabel, source, collectName = true }: Props) {
             name="name"
             type="text"
             autoComplete="given-name"
-            placeholder="First name"
+            placeholder={namePlaceholder}
             className="w-full rounded-xl border border-border bg-bg px-4 py-3 text-text placeholder:text-muted focus:border-accent focus:outline-none"
           />
         </div>
@@ -85,7 +96,7 @@ export function LeadForm({ ctaLabel, source, collectName = true }: Props) {
           type="email"
           required
           autoComplete="email"
-          placeholder="you@yourbusiness.com"
+          placeholder={emailPlaceholder}
           className="w-full rounded-xl border border-border bg-bg px-4 py-3 text-text placeholder:text-muted focus:border-accent focus:outline-none"
         />
       </div>
@@ -100,7 +111,7 @@ export function LeadForm({ ctaLabel, source, collectName = true }: Props) {
         </p>
       )}
 
-      <p className="text-center text-xs text-muted">No spam. Unsubscribe anytime.</p>
+      <p className="text-center text-xs text-muted">{footnote}</p>
     </form>
   );
 }
