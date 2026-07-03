@@ -2,7 +2,7 @@ import { site } from '@/lib/site';
 
 export function FinalCTA() {
   return (
-    <section className="section">
+    <section className="section bg-slate">
       <div className="container-tf">
         <div className="hero-glow relative overflow-hidden rounded-3xl border border-border bg-bg-alt p-10 text-center sm:p-16">
           <h2 className="mx-auto max-w-2xl text-3xl sm:text-4xl">

@@ -2,7 +2,7 @@ import { PricingCards } from '@/components/PricingCards';
 
 export function PricingSection() {
   return (
-    <section id="pricing" className="section">
+    <section id="pricing" className="section bg-slate">
       <div className="container-tf">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl sm:text-4xl">

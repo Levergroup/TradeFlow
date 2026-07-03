@@ -9,7 +9,7 @@ const bullets = [
 
 export function LeadMagnet() {
   return (
-    <section className="section bg-bg-alt/30">
+    <section className="section bg-warm">
       <div className="container-tf">
         <div className="card fade-up mx-auto grid max-w-4xl items-center gap-10 !p-8 md:grid-cols-2 md:!p-10">
           <div>

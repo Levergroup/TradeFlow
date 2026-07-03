@@ -10,7 +10,9 @@ const config: Config = {
       colors: {
         primary: 'var(--color-primary)',
         accent: 'var(--color-accent)',
+        teal: 'var(--color-teal)',
         bg: 'var(--color-bg)',
+        'bg-warm': 'var(--color-bg-warm)',
         'bg-alt': 'var(--color-bg-alt)',
         text: 'var(--color-text)',
         muted: 'var(--color-muted)',

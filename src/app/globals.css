@@ -6,19 +6,23 @@
 :root {
   --color-primary: #1e3a5f;
   --color-accent: #f59e0b;
+  --color-teal: #0d9488;
   --color-bg: #0f172a;
-  --color-bg-alt: #1e2a3a;
+  --color-bg-warm: #1a1208;
+  --color-bg-alt: #1e2d3d;
   --color-text: #f8fafc;
   --color-muted: #94a3b8;
   --color-border: #2d3f55;
+  --color-glow-amber: rgba(245, 158, 11, 0.15);
+  --color-glow-teal: rgba(13, 148, 136, 0.12);
 
   /* Font CSS vars are injected by next/font in layout.tsx and fall back here. */
   --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
   --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
 
   /* Glassmorphism surface tokens. */
-  --glass-bg: rgba(30, 58, 95, 0.15);
-  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(30, 58, 95, 0.12);
+  --glass-border: rgba(255, 255, 255, 0.07);
 }
 
 @layer base {
@@ -115,11 +119,33 @@
   /* ── Glassmorphism card ────────────────────────────────────────────── */
   .card {
     background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
-    border-radius: 16px;
+    border-radius: 20px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     @apply p-6;
+  }
+  /* Interactive lift for actionable cards (opt-in via .card-hover). */
+  .card-hover:hover {
+    transform: scale(1.02);
+    border-color: rgba(245, 158, 11, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35),
+      0 0 24px var(--color-glow-amber),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  /* Section background alternation helpers. */
+  .bg-slate {
+    background-color: var(--color-bg);
+  }
+  .bg-warm {
+    background-color: var(--color-bg-warm);
+  }
+  .bg-alt2 {
+    background-color: var(--color-bg-alt);
   }
 
   /* Primary CTA — amber bg, dark text, soft amber glow. */
@@ -147,7 +173,13 @@
     height: 1px;
     border: 0;
     margin: 0;
-    background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(245, 158, 11, 0.2) 30%,
+      rgba(13, 148, 136, 0.2) 70%,
+      transparent 100%
+    );
   }
 
   /* ── Nav (blur on scroll + active indicator) ───────────────────────── */
@@ -166,10 +198,7 @@
   .nav-link {
     position: relative;
   }
-  .nav-link.active {
-    color: var(--color-text);
-  }
-  .nav-link.active::after {
+  .nav-link::after {
     content: '';
     position: absolute;
     left: 0;
@@ -178,16 +207,31 @@
     height: 2px;
     border-radius: 2px;
     background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    transform: scaleX(1);
+  }
+  .nav-link.active {
+    color: var(--color-text);
   }
 
   /* ── Pricing featured card glow ────────────────────────────────────── */
   .pricing-featured {
     border: 1px solid rgba(245, 158, 11, 0.4);
-    box-shadow: 0 0 30px rgba(245, 158, 11, 0.15);
+    box-shadow: 0 0 40px rgba(245, 158, 11, 0.2);
   }
   @media (min-width: 1024px) {
     .pricing-featured {
-      transform: scale(1.03);
+      transform: scale(1.04);
+    }
+    /* Featured hover must beat the generic .card-hover scale(1.02). */
+    .pricing-featured.card-hover:hover {
+      transform: scale(1.06);
+      border-color: rgba(245, 158, 11, 0.55);
     }
   }
 
@@ -258,6 +302,29 @@
   .stagger > *:nth-child(8) { transition-delay: 700ms; }
 }
 
+/* ── Ticker marquee ──────────────────────────────────────────────────── */
+.ticker-track {
+  animation: ticker-scroll 30s linear infinite;
+  will-change: transform;
+}
+.ticker-mask:hover .ticker-track {
+  animation-play-state: paused;
+}
+.ticker-mask {
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 /* ── Keyframes ───────────────────────────────────────────────────────── */
 @keyframes blob-drift-a {
   0%, 100% { transform: translateX(-50%) translateY(0) scale(1); }
@@ -279,5 +346,8 @@
     opacity: 1;
     transform: none;
     transition: none;
+  }
+  .ticker-track {
+    animation: none;
   }
 }

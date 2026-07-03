@@ -20,7 +20,7 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="section bg-bg-alt/30">
+    <section id="how-it-works" className="section bg-slate">
       <div className="container-tf">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="fade-up text-3xl sm:text-4xl">From Lead to Paid in 3 Steps</h2>

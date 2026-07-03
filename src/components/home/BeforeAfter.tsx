@@ -9,7 +9,7 @@ const rows = [
 
 export function BeforeAfter() {
   return (
-    <section className="section">
+    <section className="section bg-alt2">
       <div className="container-tf">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="fade-up text-3xl sm:text-4xl">

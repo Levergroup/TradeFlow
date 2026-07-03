@@ -18,7 +18,7 @@ const pains = [
 
 export function PainChain() {
   return (
-    <section className="section bg-bg-alt/30">
+    <section className="section bg-warm">
       <div className="container-tf">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="fade-up text-3xl sm:text-4xl">If you run a trade, you know this…</h2>

@@ -23,7 +23,7 @@ const testimonials = [
 
 export function SocialProof() {
   return (
-    <section className="section bg-bg-alt/30">
+    <section className="section bg-alt2">
       <div className="container-tf">
         {/* Stats row */}
         <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-3">
