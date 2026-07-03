@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const core: MetadataRoute.Sitemap = [
     { url: url('/'), lastModified: now, changeFrequency: 'daily', priority: 1.0 },
+    { url: url('/features'), lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: url('/pricing'), lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: url('/contact'), lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
   ];
